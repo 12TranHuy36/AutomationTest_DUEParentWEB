@@ -4,12 +4,17 @@ import common.BaseTest;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 public class KhoaTaiKhoan extends BaseTest {
     @BeforeMethod
     public void setUp(){
         setupDriver();
         driver.get("https://localhost:7011/");
+    }
+    @Test
+    public void testScript24(){
+        
     }
 
 
