@@ -1,0 +1,16 @@
+{
+  "thongBao": [
+    {
+      "tieuDe": "Thông báo 1",
+      "noiDung": "Nội dung thông báo 1"
+    },
+    {
+      "tieuDe": "Test chèn hình ảnh và link",
+      "noiDung": " Xin chào các bạn Gán link facebook"
+    },
+    {
+      "tieuDe": "My name is Huy",
+      "noiDung": "Hello"
+    }
+  ]
+}

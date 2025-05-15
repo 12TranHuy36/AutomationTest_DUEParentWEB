@@ -1,0 +1,1 @@
+{"uuid":"d3070c59-8c2b-4a74-ae58-1b6b206e8305","name":"testscript.ThemThongBao.setUp","children":["cf295fc0-7166-4731-9a41-9ed658171951"],"description":"","befores":[{"name":"setUp","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1746032916599,"stop":1746032921519}],"afters":[],"start":1746032916599,"stop":1746032921519}

@@ -1,0 +1,26 @@
+{
+  "trangThai": [
+    {
+      "value": "0",
+      "label": "Ẩn"
+    },
+    {
+      "value": "1",
+      "label": "Công khai"
+    }
+  ],
+  "nguoiTao": [
+    {
+      "value": "Quản trị viên",
+      "label": "Quản trị viên"
+    },
+    {
+      "value": "Tk.Phòng đào tạo",
+      "label": "Tk.Phòng đào tạo"
+    },
+    {
+      "value": "Tk. Phòng công tác sinh viên",
+      "label": "Tk. Phòng công tác sinh viên"
+    }
+  ]
+}

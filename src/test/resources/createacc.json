@@ -1,0 +1,65 @@
+{
+    "accValid": [
+        {
+            "tenHienThi": "Trần Trương Nhật Huy",
+            "tenDangNhap": "nhathuy12",
+            "vaiTro": "Ban chủ nhiệm",
+            "phongBan": "Phòng Khảo thí",
+            "soDienThoai": "0912345678",
+            "email": "huy12@example.com",
+            "trangThai": "Mở",
+            "matKhau": "MatKhau123",
+            "nhapLaiMatKhau": "MatKhau123"
+        },
+        {
+            "tenHienThi": "Nguyễn Ý Phương",
+            "tenDangNhap": "phuong12",
+            "vaiTro": "Thư ký",
+            "phongBan": "Thư viện",
+            "soDienThoai": "0912345678",
+            "email": "phuong12@example.com",
+            "trangThai": "Mở",
+            "matKhau": "MatKhau123",
+            "nhapLaiMatKhau": "MatKhau123"
+        }
+
+    ],
+    "accInvalid": [
+        {
+            "tenHienThi": "Tran Thi B",
+            "tenDangNhap": "nguyenvana",
+            "vaiTro": "Ban chủ nhiệm",
+            "phongBan": "Ký túc xá",
+            "soDienThoai": "0987654321",
+            "email": "tranthib@example.com",
+            "trangThai": "Mở",
+            "matKhau": "MatKhau123",
+            "nhapLaiMatKhau": "MatKhau123",
+            "lyDoKhongHopLe": "Trùng tên đăng nhập với tài khoản khác"
+        },
+        {
+            "tenHienThi": "Le Van C",
+            "tenDangNhap": "levanc",
+            "vaiTro": "Ban chủ nhiệm",
+            "phongBan": "Ký túc xá",
+            "soDienThoai": "0909123123",
+            "email": "levanc#email.com",
+            "trangThai": "Mở",
+            "matKhau": "MatKhau123",
+            "nhapLaiMatKhau": "MatKhau123",
+            "lyDoKhongHopLe": "Email sai định dạng"
+        },
+        {
+            "tenHienThi": "Pham Thi D",
+            "tenDangNhap": "phamthid",
+            "vaiTro": "Ban chủ nhiệm",
+            "phongBan": "Ký túc xá",
+            "soDienThoai": "0911222333",
+            "email": "phamthid@example.com",
+            "trangThai": "Mở",
+            "matKhau": "MatKhau123",
+            "nhapLaiMatKhau": "KhacMatKhau123",
+            "lyDoKhongHopLe": "Mật khẩu và nhập lại mật khẩu không khớp"
+        }
+    ]
+}

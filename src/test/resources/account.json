@@ -1,0 +1,18 @@
+{
+  "acc": {
+    "admin": [{
+      "user": "admin",
+      "pass": "123456"
+    }],
+    "thuKy": [
+      {
+        "user": "phongctsv",
+        "pass": "123456"
+      },
+      {
+        "user": "phongdaotao",
+        "pass": "123456"
+      }
+    ]
+  }
+}
