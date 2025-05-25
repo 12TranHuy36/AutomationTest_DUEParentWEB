@@ -26,7 +26,7 @@
     ],
     "accInvalid": [
         {
-            "tenHienThi": "Tran Thi B",
+            "tenHienThi": "a7Fj92LdKeW1xQzMvNbT38YhRuXcL0pAvBsJdEnWkZoVgyHtFi1",
             "tenDangNhap": "nguyenvana",
             "vaiTro": "Ban chủ nhiệm",
             "phongBan": "Ký túc xá",
@@ -35,7 +35,31 @@
             "trangThai": "Mở",
             "matKhau": "MatKhau123",
             "nhapLaiMatKhau": "MatKhau123",
-            "lyDoKhongHopLe": "Trùng tên đăng nhập với tài khoản khác"
+            "lyDoKhongHopLe": "Tên hiển thị tối đa 50 ký tự!"
+        },
+        {
+            "tenHienThi": "Tran Thi B",
+            "tenDangNhap": "a7Fj92LdKeW1xQzMvNbT38YhRuXcL0pAvBsJdEnWkZoVgyHtFi1",
+            "vaiTro": "Ban chủ nhiệm",
+            "phongBan": "Ký túc xá",
+            "soDienThoai": "0987654321",
+            "email": "tranthib@example.com",
+            "trangThai": "Mở",
+            "matKhau": "MatKhau123",
+            "nhapLaiMatKhau": "MatKhau123",
+            "lyDoKhongHopLe": "Tên đăng nhập chỉ được chứa chữ và số. Tối đa 50 ký tự."
+        },
+        {
+            "tenHienThi": "Tran Thi B",
+            "tenDangNhap": "nguyenvana",
+            "vaiTro": "Ban chủ nhiệm",
+            "phongBan": "Ký túc xá",
+            "soDienThoai": "098765432",
+            "email": "tranthib@example.com",
+            "trangThai": "Mở",
+            "matKhau": "MatKhau123",
+            "nhapLaiMatKhau": "MatKhau123",
+            "lyDoKhongHopLe": "Số điện thoại phải gồm 10 chữ số!"
         },
         {
             "tenHienThi": "Le Van C",
@@ -47,7 +71,7 @@
             "trangThai": "Mở",
             "matKhau": "MatKhau123",
             "nhapLaiMatKhau": "MatKhau123",
-            "lyDoKhongHopLe": "Email sai định dạng"
+            "lyDoKhongHopLe": "Email chưa đúng định dạng!"
         },
         {
             "tenHienThi": "Pham Thi D",
@@ -57,9 +81,21 @@
             "soDienThoai": "0911222333",
             "email": "phamthid@example.com",
             "trangThai": "Mở",
-            "matKhau": "MatKhau123",
-            "nhapLaiMatKhau": "KhacMatKhau123",
-            "lyDoKhongHopLe": "Mật khẩu và nhập lại mật khẩu không khớp"
+            "matKhau": "Mat",
+            "nhapLaiMatKhau": "Mat",
+            "lyDoKhongHopLe": "Mật khẩu cần ít nhất 6 ký tự!"
+        },
+        {
+            "tenHienThi": "Truong Thi Hoa",
+            "tenDangNhap": "truongthihoa",
+            "vaiTro": "Ban chủ nhiệm",
+            "phongBan": "Ký túc xá",
+            "soDienThoai": "0911222333",
+            "email": "phamthid@example.com",
+            "trangThai": "Mở",
+            "matKhau": "Matkhau123",
+            "nhapLaiMatKhau": "Matkhau1234",
+            "lyDoKhongHopLe": "Mật khẩu xác nhận không trùng khớp!"
         }
     ]
 }

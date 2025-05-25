@@ -15,12 +15,12 @@
       "label": "Quản trị viên"
     },
     {
-      "value": "Tk.Phòng đào tạo",
-      "label": "Tk.Phòng đào tạo"
+      "value": "TK. Phòng đào tạo",
+      "label": "TK. Phòng đào tạo"
     },
     {
-      "value": "Tk. Phòng công tác sinh viên",
-      "label": "Tk. Phòng công tác sinh viên"
+      "value": "TK. phòng CTSV",
+      "label": "TK. phòng CTSV"
     }
   ]
 }

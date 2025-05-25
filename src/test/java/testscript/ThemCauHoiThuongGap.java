@@ -2,10 +2,7 @@ package testscript;
 
 import common.BaseTest;
 import data.ReadDataProvider;
-import io.qameta.allure.Allure;
-import io.qameta.allure.Description;
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
@@ -15,6 +12,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import page.CauHoiThuongGapPage;
 
+@Epic("Quản lý câu hỏi thường gặp")
+@Feature("Thêm câu hỏi thường gặp")
 public class ThemCauHoiThuongGap extends BaseTest {
     @BeforeMethod
     public void setUp(){

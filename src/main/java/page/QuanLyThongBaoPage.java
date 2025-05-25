@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
 
 public class QuanLyThongBaoPage {
@@ -81,7 +82,7 @@ public class QuanLyThongBaoPage {
     }
     public String alert(){
         Alert alert = driver.switchTo().alert(); // Switch qua alert
-        String alertText = alert.getText(); // Lấy text của alert1
+        String alertText = alert.getText().trim(); // Lấy text của alert1
         alert.accept(); // Bấm OK alert đầu tiên
         return  alertText;
     }
@@ -168,7 +169,7 @@ public class QuanLyThongBaoPage {
         }
     }
     public String checkTDTB(){
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[starts-with(@href, '/Home/DetailAnnounce')]")));
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='announce-detail']//a[1]")));
         String fullText = element.getText();
         String mainText = fullText.split("From:")[0].trim();  // Loại bỏ phần từ "From:" trở đi
     return mainText;
@@ -196,6 +197,35 @@ public class QuanLyThongBaoPage {
         // Click nút "Lọc"
         WebElement buttonLoc = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='xmas-popup-filter']//button[@class='apply']")));
         buttonLoc.click();
+    }
+    public void checkTBAccTao(){
+        String tenacc = "From: "+ wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='name']//b"))).getText();
+        String check = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='announce-detail'][1]//a//small"))).getText();
+        if(tenacc.equals(check)){
+            clickCheckbox(1);
+        }else{
+            List<WebElement> listElements = driver.findElements(By.xpath("//div[@id='announce-detail']//a//small"));
+            int total = listElements.size();
+            for (int index = 1; index <= total; index++) {
+                String from =nguoiDang(index);
+                if (from.equals("From: Quản trị viên")) {
+                    clickCheckbox(index);
+                    break;
+                }
+            }
+        }
+    }
+    public void checkTBNotAccTao(){
+        List<WebElement> listElements = driver.findElements(By.xpath("//div[@id='announce-detail']//a//small"));
+        int total = listElements.size();
+        for (int index = 1; index <= total; index++) {
+            String from = nguoiDang(index);
+            if (!from.equals("From: Quản trị viên")) {
+                clickCheckbox(index);
+                break;
+            }
+            index++;
+        }
     }
 
 

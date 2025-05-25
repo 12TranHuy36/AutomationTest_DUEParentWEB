@@ -2,10 +2,7 @@ package testscript;
 
 import common.BaseTest;
 import data.ReadDataProvider;
-import io.qameta.allure.Allure;
-import io.qameta.allure.Description;
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.*;
 
 import org.testng.Assert;
 import org.testng.ITestResult;
@@ -14,6 +11,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import page.TaiKhoanBQTPage;
 
+@Epic("Quản lý tài khoản ban quản trị")
+@Feature("Tạo tài khoản")
 public class TaoTaiKhoan extends BaseTest {
     @BeforeMethod
     public void setUp(){
@@ -83,7 +82,7 @@ public class TaoTaiKhoan extends BaseTest {
             Allure.step("9. Nhấn Lưu");
             tk.clickBtnLuu();
             sleep(1000);
-            Allure.step("6. Xác thực hiển thị alert hiển thị thông báo tên đăng nhập đã được sử dụng");
+            Allure.step("10. Xác thực hiển thị alert hiển thị thông báo tên đăng nhập đã được sử dụng");
             String ndAlert = "Tên đăng nhập này đã được sử dụng. Vui lòng thử lại!";
             Assert.assertEquals(tk.alert(),ndAlert,"Nội dung thông báo không khớp");
         } catch (AssertionError e) {
@@ -124,7 +123,7 @@ public class TaoTaiKhoan extends BaseTest {
             Allure.step("9. Nhấn Lưu");
             tk.clickBtnLuu();
             sleep(1000);
-            Allure.step("6. Xác thực hiển thị alert hiển thị thông báo tên hiển thị đã được sử dụng");
+            Allure.step("10. Xác thực hiển thị alert hiển thị thông báo tên hiển thị đã được sử dụng");
             String ndAlert = "Tên hiển thị này đã được sử dụng. Vui lòng thử lại!";
             Assert.assertEquals(tk.alert(),ndAlert,"Nội dung thông báo không khớp");
         } catch (AssertionError e) {
@@ -133,6 +132,35 @@ public class TaoTaiKhoan extends BaseTest {
         } catch (Exception e) {
             Allure.step("Lỗi xảy ra trong quá trình chạy test: " + e.getMessage());
             throw new RuntimeException(e); // Ném lại để TestNG biết có lỗi
+        }
+    }
+
+    @Test(description = "Verify that the corresponding invalid red messages are displayed when Admin enters invalid values into the textboxes.",
+            dataProvider = "AccountAdminAndAccInvalid", dataProviderClass = ReadDataProvider.class)
+    @Severity(SeverityLevel.CRITICAL)
+    @Description("Kiểm tra các thông báo màu đỏ không hợp lệ tương ứng được hiển thị khi Quản trị viên nhập các giá trị không hợp lệ vào hộp văn bản.")
+    public void testScript24(String user, String pass, String tenht, String tendn, String vaitro, String pb, String sdt, String email, String trangthai, String mk, String nhaplaimk, String tbloi ){
+        try{
+            Allure.step("1. Đăng nhập vào hệ thống bằng acc Admin");
+            login(user, pass);
+            TaiKhoanBQTPage tk = new TaiKhoanBQTPage(driver);
+            Allure.step("2. Điều hướng đến màn hình tài khoản ban quản trị");
+            tk.navigateTKBQT();
+            Allure.step("4. Click icon Tạo tài khoản");
+            tk.clickIconTao();
+            Allure.step("5. Nhập thông tin vào form tạo tài khoản");
+            tk.enterCreateAcc(tenht, tendn, vaitro, pb, sdt, email, trangthai, mk, nhaplaimk );
+            Allure.step("6. Nhấn Lưu");
+            tk.clickBtnLuu();
+            sleep(1000);
+            Allure.step("7. Xác thực hiển thị thông báo '"+tbloi+"'");
+            Assert.assertTrue(tk.checkTBLoi(tbloi),"Nội dung thông báo không khớp với yêu cầu");
+        } catch (AssertionError e) {
+            Allure.step("Kiểm tra thất bại: " + e.getMessage());
+            throw e;
+        } catch (Exception e) {
+            Allure.step("Lỗi xảy ra trong quá trình chạy test: " + e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 

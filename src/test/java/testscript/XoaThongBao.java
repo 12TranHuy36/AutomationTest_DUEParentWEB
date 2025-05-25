@@ -2,10 +2,8 @@ package testscript;
 
 import common.BaseTest;
 import data.ReadDataProvider;
-import io.qameta.allure.Allure;
-import io.qameta.allure.Description;
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.*;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -19,6 +17,8 @@ import page.QuanLyThongBaoPage;
 import java.io.IOException;
 import java.util.List;
 
+@Epic("Quản lý thông báo")
+@Feature("Xóa thông báo")
 public class XoaThongBao extends BaseTest {
     @BeforeMethod
     public void setUp(){
@@ -31,31 +31,17 @@ public class XoaThongBao extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Description("Kiểm tra việc xóa thành công thông báo do tạo chính người dùng tạo ra")
     public void testScript7(String user, String pass) {
-        Allure.step("1. Đăng nhập vào hệ thống bằng acc "+user);
-        login(user, pass);
-        QuanLyThongBaoPage ql =new QuanLyThongBaoPage(driver);
-        Allure.step("2. Điều hướng đến màn hình quản lý thông báo");
-        ql.navigationQLTB();
-        Allure.step("3. Kiểm tra thông báo đó có phải là của chính acc đó tạo không, nếu đúng thì click vào checkbox thông báo đó");
-        String tenacc = "From: "+ wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='name']//b"))).getText();
-        String check = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='announce-detail'][1]//a//small"))).getText();
-        if(tenacc.equals(check)){
-            ql.clickCheckbox(1);
-        }else{
-            List<WebElement> listElements = driver.findElements(By.xpath("//div[@id='announce-detail']//a//small"));
-            int total = listElements.size();
-            for (int index = 1; index <= total; index++) {
-                String from =ql.nguoiDang(index);
-                if (from.equals("From: Quản trị viên")) {
-                    ql.clickCheckbox(index);
-                    break;
-                }
-            }
-        }
-        Allure.step("4. Click vào icon xóa");
-        ql.clickIconXoa();
-        sleep(1000);
         try {
+            Allure.step("1. Đăng nhập vào hệ thống bằng acc "+user);
+            login(user, pass);
+            QuanLyThongBaoPage ql =new QuanLyThongBaoPage(driver);
+            Allure.step("2. Điều hướng đến màn hình quản lý thông báo");
+            ql.navigationQLTB();
+            Allure.step("3. Kiểm tra thông báo đó có phải là của chính acc đó tạo không, nếu đúng thì click vào checkbox thông báo đó");
+            ql.checkTBAccTao();
+            Allure.step("4. Click vào icon xóa");
+            ql.clickIconXoa();
+            sleep(1000);
             Allure.step("5. Xác thực hiển thị alert cảnh báo có chắc chắn muốn xóa không");
             Assert.assertEquals(ql.alert(),"Bạn có chắc chắn muốn xóa 1 thông báo này?","Nội dung thông báo không khớp");
             sleep(500);
@@ -74,31 +60,20 @@ public class XoaThongBao extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Description("Kiểm tra người dùng tài khoản quản trị viên không thể xóa thông báo do người khác tạo")
     public void testScript8() throws IOException{
-        loadJsonFile("src/test/resources/account.json");
-        Allure.step("1. Đăng nhập vào hệ thống bằng acc admin");
-        login(readJson("$.acc.admin[0].user"), readJson("$.acc.admin[0].pass"));
-        QuanLyThongBaoPage ql = new QuanLyThongBaoPage(driver);
-        Allure.step("2. Điều hướng đến màn hình quản lý thông báo");
-        ql.navigationQLTB();
-        Allure.step("3. Kiểm tra thông báo đó không phải là của chính acc Admin đó tạo không, nếu đúng thì click vào checkbox thông báo đó");
-        List<WebElement> listElements = driver.findElements(By.xpath("//div[@id='announce-detail']//a//small"));
-        int total = listElements.size();
-        for (int index = 1; index <= total; index++) {
-            String from = ql.nguoiDang(index);
-            if (!from.equals("From: Quản trị viên")) {
-                ql.clickCheckbox(index);
-                break;
-            }
-            index++;
-        }
-        Allure.step("4. Click vào icon xóa");
-        ql.clickIconXoa();
-        sleep(1000);
         try {
+            loadJsonFile("src/test/resources/account.json");
+            Allure.step("1. Đăng nhập vào hệ thống bằng acc admin");
+            login(readJson("$.acc.admin[0].user"), readJson("$.acc.admin[0].pass"));
+            QuanLyThongBaoPage ql = new QuanLyThongBaoPage(driver);
+            Allure.step("2. Điều hướng đến màn hình quản lý thông báo");
+            ql.navigationQLTB();
+            Allure.step("3. Kiểm tra thông báo đó không phải là của chính acc Admin đó tạo không, nếu đúng thì click vào checkbox thông báo đó");
+            ql.checkTBNotAccTao();
+            Allure.step("4. Click vào icon xóa");
+            ql.clickIconXoa();
+            sleep(1000);
             Allure.step("5. Xác thực hiển thị alert với nội dung đúng theo tài liệu");
             Assert.assertEquals(ql.alert(), "Bạn không có quyền xóa 1 thông báo do người dùng khác đã tạo!", "Nội dung thông báo không khớp");
-
-            System.out.println("Testcase pass: Admin không có quyền xóa thông báo do chính acc user khác tạo");
         } catch (AssertionError e) {
             Allure.step("Kiểm tra thất bại: " + e.getMessage());
             throw e;
@@ -112,33 +87,33 @@ public class XoaThongBao extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Description("Kiểm tra người dùng quản trị chọn xóa cùng lúc nhiều thông báo do chính họ và người khác tạo")
     public void testScript9() throws IOException{
-        loadJsonFile("src/test/resources/account.json");
-        Allure.step("1. Đăng nhập vào hệ thống bằng acc admin");
-        login(readJson("$.acc.admin[0].user"), readJson("$.acc.admin[0].pass"));
-        QuanLyThongBaoPage ql = new QuanLyThongBaoPage(driver);
-        Allure.step("2. Điều hướng đến màn hình quản lý thông báo");
-        ql.navigationQLTB();
-        Allure.step("3. Click vào những checkbox của thông báo do acc admin tạo và acc khác tạo");
-        List<WebElement> listElements = driver.findElements(By.xpath("//div[@id='announce-detail']//a//small"));
-        int total = listElements.size();
-        int count_i = 1;
-        int count_y = 1;
-        for (int index = 1; index <= total; index++) {
-            String from = ql.nguoiDang(index);
-            if (!from.equals("From: Quản trị viên") && count_i < 4) {
-                ql.clickCheckbox(index);
-                count_i++;
-            }else if(from.equals("From: Quản trị viên") && count_y < 3){
-                ql.clickCheckbox(index);
-                count_y++;
-            }
-        }
-        Allure.step("4. Kiểm tra hiển thị số lượng đã chọn ở mục có đúng không");
-        Assert.assertEquals(ql.soItem(),"5","Không hiển thị đúng số lượng đã chọn");
-        Allure.step("5. Click vào icon xóa");
-        ql.clickIconXoa();
-        sleep(1000);
         try {
+            loadJsonFile("src/test/resources/account.json");
+            Allure.step("1. Đăng nhập vào hệ thống bằng acc admin");
+            login(readJson("$.acc.admin[0].user"), readJson("$.acc.admin[0].pass"));
+            QuanLyThongBaoPage ql = new QuanLyThongBaoPage(driver);
+            Allure.step("2. Điều hướng đến màn hình quản lý thông báo");
+            ql.navigationQLTB();
+            Allure.step("3. Click vào những checkbox của thông báo do acc admin tạo và acc khác tạo");
+            List<WebElement> listElements = driver.findElements(By.xpath("//div[@id='announce-detail']//a//small"));
+            int total = listElements.size();
+            int count_i = 1;
+            int count_y = 1;
+            for (int index = 1; index <= total; index++) {
+                String from = ql.nguoiDang(index);
+                if (!from.equals("From: Quản trị viên") && count_i < 4) {
+                    ql.clickCheckbox(index);
+                    count_i++;
+                }else if(from.equals("From: Quản trị viên") && count_y < 3){
+                    ql.clickCheckbox(index);
+                    count_y++;
+                }
+            }
+            Allure.step("4. Kiểm tra hiển thị số lượng đã chọn ở mục có đúng không");
+            Assert.assertEquals(ql.soItem(),"5","Không hiển thị đúng số lượng đã chọn");
+            Allure.step("5. Click vào icon xóa");
+            ql.clickIconXoa();
+            sleep(1000);
             Allure.step("6. Xác thực hiển thị alert hiển thị thông báo chỉ xóa được những thông báo do admin tạo");
             String ndAlert1 = "Bạn không có quyền xóa " + (count_i-1)+ " thông báo do người dùng khác đã tạo!\nBấm 'Ok' nếu bạn chắc chắn muốn xóa "+ (count_y-1) + " thông báo mà bạn đã tạo.";
             Assert.assertEquals(ql.alert(),ndAlert1,"Nội dung thông báo không khớp");
@@ -160,15 +135,15 @@ public class XoaThongBao extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Description("Kiểm tra thông báo được hiển thị khi người dùng nhấp vào biểu tượng xóa mà không chọn bất kỳ thông báo nào")
     public void testScript10(String user, String pass){
-        Allure.step("1. Đăng nhập vào hệ thống bằng acc "+user);
-        login(user, pass);
-        QuanLyThongBaoPage ql = new QuanLyThongBaoPage(driver);
-        Allure.step("2. Điều hướng đến màn hình quản lý thông báo");
-        ql.navigationQLTB();
-        Allure.step("3. Click vào icon xóa");
-        ql.clickIconXoa();
-        sleep(1000);
         try {
+            Allure.step("1. Đăng nhập vào hệ thống bằng acc "+user);
+            login(user, pass);
+            QuanLyThongBaoPage ql = new QuanLyThongBaoPage(driver);
+            Allure.step("2. Điều hướng đến màn hình quản lý thông báo");
+            ql.navigationQLTB();
+            Allure.step("3. Click vào icon xóa");
+            ql.clickIconXoa();
+            sleep(1000);
             Allure.step("4. Xác thực hiển thị alert với nội dung phải chọn ít nhất môt cái để xóa");
             Assert.assertEquals(ql.alert(), "Vui lòng chọn ít nhất một thông báo để xóa.", "Nội dung thông báo không khớp");
         } catch (AssertionError e) {

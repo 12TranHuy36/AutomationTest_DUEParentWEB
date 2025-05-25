@@ -14,7 +14,6 @@
             <class name="testscript.ThemCauHoiThuongGap"/>
             <class name="testscript.TimKiemCauHoiThuongGap"/>
             <class name="testscript.TaoTaiKhoan"/>
-            <class name="testscript.LocThongBao"/>
         </classes>
     </test>
 </suite>

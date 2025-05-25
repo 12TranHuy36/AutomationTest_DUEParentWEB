@@ -2,10 +2,7 @@ package testscript;
 
 import common.BaseTest;
 import data.ReadDataProvider;
-import io.qameta.allure.Allure;
-import io.qameta.allure.Description;
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -18,6 +15,8 @@ import page.QuanLyThongBaoPage;
 
 import java.util.List;
 
+@Epic("Quản lý thông báo")
+@Feature("Lọc thông báo")
 public class LocThongBao extends BaseTest {
     @BeforeMethod
     public void setUp() {
@@ -30,15 +29,15 @@ public class LocThongBao extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Description("Kiểm tra việc lọc thông báo theo trạng thái cập nhật danh sách hiển thị một cách chính xác")
     public void testScript16(String user, String pass, String value, String label){
-        Allure.step("1. Đăng nhập vào hệ thống bằng acc "+user);
-        login(user, pass);
-        QuanLyThongBaoPage ql = new QuanLyThongBaoPage(driver);
-        Allure.step("2. Điều hướng đến màn hình quản lý thông báo ");
-        ql.navigationQLTB();
-        Allure.step("3. Click vào icon lọc thông báo");
-        ql.clickIconLocQLTB();
-        sleep(1000);
         try{
+            Allure.step("1. Đăng nhập vào hệ thống bằng acc "+user);
+            login(user, pass);
+            QuanLyThongBaoPage ql = new QuanLyThongBaoPage(driver);
+            Allure.step("2. Điều hướng đến màn hình quản lý thông báo ");
+            ql.navigationQLTB();
+            Allure.step("3. Click vào icon lọc thông báo");
+            ql.clickIconLocQLTB();
+            sleep(1000);
             Allure.step("4. Xác thực xem có hiển thị popup lọc thông báo không");
             String popupFilter = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='xmas-popup-filter-2']"))).getCssValue("display");
             Assert.assertEquals(popupFilter, "block", "Popup lọc không mở");
@@ -78,15 +77,15 @@ public class LocThongBao extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Description("Kiểm tra việc lọc thông báo theo người đăng cập nhật danh sách hiển thị một cách chính xác")
     public void testScript17(String user, String pass, String value, String label){
-        Allure.step("1. Đăng nhập vào hệ thống bằng acc "+user);
-        login(user, pass);
-        QuanLyThongBaoPage ql = new QuanLyThongBaoPage(driver);
-        Allure.step("2. Điều hướng đến màn hình quản lý thông báo ");
-        ql.navigationTB();
-        Allure.step("3. Click vào icon lọc thông báo");
-        ql.clickIconLocTB();
-        sleep(1000);
         try{
+            Allure.step("1. Đăng nhập vào hệ thống bằng acc "+user);
+            login(user, pass);
+            QuanLyThongBaoPage ql = new QuanLyThongBaoPage(driver);
+            Allure.step("2. Điều hướng đến màn hình quản lý thông báo ");
+            ql.navigationTB();
+            Allure.step("3. Click vào icon lọc thông báo");
+            ql.clickIconLocTB();
+            sleep(1000);
             Allure.step("4. Xác thực xem có hiển thị popup lọc thông báo không");
             String popupFilter = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='xmas-popup-filter']"))).getCssValue("display");
             Assert.assertEquals(popupFilter, "block", "Popup lọc không mở");

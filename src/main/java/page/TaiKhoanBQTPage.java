@@ -9,6 +9,9 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
+import java.util.Random;
+
 
 public class TaiKhoanBQTPage {
     private WebDriver driver;
@@ -76,6 +79,11 @@ public class TaiKhoanBQTPage {
         String alertText = alert.getText(); // Lấy text của alert1
         alert.accept(); // Bấm OK alert đầu tiên
         return  alertText;
+    }
+    public boolean checkTBLoi(String tbloi){
+        WebElement check = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'"+tbloi+"')]")));
+        Boolean a = check.isDisplayed();
+        return a;
     }
 
 }

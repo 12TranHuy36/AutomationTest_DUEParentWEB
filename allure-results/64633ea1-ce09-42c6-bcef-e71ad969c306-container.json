@@ -1,0 +1,1 @@
+{"uuid":"64633ea1-ce09-42c6-bcef-e71ad969c306","name":"testscript.TaoTaiKhoan.setUp","children":["d3ff35ea-69d0-4d63-a000-a859eb8831dd"],"description":"","befores":[{"name":"setUp","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1748081345951,"stop":1748081352733}],"afters":[],"start":1748081345951,"stop":1748081352733}

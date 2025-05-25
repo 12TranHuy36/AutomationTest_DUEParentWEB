@@ -2,10 +2,7 @@ package testscript;
 
 import common.BaseTest;
 import data.ReadDataProvider;
-import io.qameta.allure.Allure;
-import io.qameta.allure.Description;
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -19,6 +16,8 @@ import page.QuanLyThongBaoPage;
 import java.io.IOException;
 import java.util.List;
 
+@Epic("Quản lý thông báo")
+@Feature("Chỉnh sửa thông báo")
 public class ChinhSuaThongBao extends BaseTest {
 
     @BeforeMethod
@@ -32,35 +31,35 @@ public class ChinhSuaThongBao extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Description("Kiểm tra người dùng đã chỉnh sửa thành công nội dung và tiêu đề của thông báo mà họ đã đăng")
     public void testScript14(String user, String pass){
-        Allure.step("1. Đăng nhập vào hệ thống bằng acc "+user);
-        login(user, pass);
-        QuanLyThongBaoPage ql =new QuanLyThongBaoPage(driver);
-        String td = "Chỉnh sửa tiêu đề";
-        String nd = "Chỉnh sửa nội dung";
-        Allure.step("2. Điều hướng đến màn hình quản lý thông báo");
-        ql.navigationQLTB();
+        try{
+            Allure.step("1. Đăng nhập vào hệ thống bằng acc "+user);
+            login(user, pass);
+            QuanLyThongBaoPage ql =new QuanLyThongBaoPage(driver);
+            String td = "Chỉnh sửa tiêu đề";
+            String nd = "Chỉnh sửa nội dung";
+            Allure.step("2. Điều hướng đến màn hình quản lý thông báo");
+            ql.navigationQLTB();
 
-        Allure.step("3. Tìm thông báo do do chính acc đó đăng");
-        String tenacc = "From: "+ wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='name']//b"))).getText();
-        String check = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='announce-detail'][1]//a//small"))).getText();
-        if(tenacc.equals(check)){
-            Allure.step("4. Click vào xem chi tiết thông báo đó");
-            ql.clickXemTBCT(1);
-        }else{
-            Allure.step("4. Click vào xem chi tiết thông báo đó");
-            List<WebElement> listElements = driver.findElements(By.xpath("//div[@id='announce-detail']//a//small"));
-            int total = listElements.size();
-            for (int index = 1; index <= total; index++) {
-                String from =ql.nguoiDang(index);
-                if (from.equals("From: Quản trị viên")) {
-                    ql.clickXemTBCT(index);
-                    break;
+            Allure.step("3. Tìm thông báo do do chính acc đó đăng");
+            String tenacc = "From: "+ wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='name']//b"))).getText();
+            String check = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='announce-detail'][1]//a//small"))).getText();
+            if(tenacc.equals(check)){
+                Allure.step("4. Click vào xem chi tiết thông báo đó");
+                ql.clickXemTBCT(1);
+            }else{
+                Allure.step("4. Click vào xem chi tiết thông báo đó");
+                List<WebElement> listElements = driver.findElements(By.xpath("//div[@id='announce-detail']//a//small"));
+                int total = listElements.size();
+                for (int index = 1; index <= total; index++) {
+                    String from =ql.nguoiDang(index);
+                    if (from.equals("From: Quản trị viên")) {
+                        ql.clickXemTBCT(index);
+                        break;
+                    }
                 }
             }
-        }
-        Allure.step("5. Click vào icon chỉnh sửa");
-        ql.clickIconEdit();
-        try{
+            Allure.step("5. Click vào icon chỉnh sửa");
+            ql.clickIconEdit();
             Allure.step("6. Xác thực xem có hiển thị popup chỉnh sửa thông báo không");
             sleep(1000);
             String popupDisplay = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='xmas-popup']"))).getCssValue("display");
@@ -88,33 +87,33 @@ public class ChinhSuaThongBao extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Description("Kiểm tra thông báo lỗi 'Không được để trống!' được hiển thị khi người dùng để trống trường tiêu đề và nội dung trong biểu mẫu chỉnh sửa thông báo")
     public  void testScript15(String user, String pass){
-        Allure.step("1. Đăng nhập vào hệ thống bằng acc "+user);
-        login(user,pass);
-        QuanLyThongBaoPage ql = new QuanLyThongBaoPage(driver);
-        Allure.step("2. Điều hướng đến màn hình quản lý thông báo ");
-        ql.navigationQLTB();
-        Allure.step("3. Tìm thông báo do do chính acc đó đăng");
-        String tenacc = "From: "+ wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='name']//b"))).getText();
-        String check = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='announce-detail'][1]//a//small"))).getText();
-        if(tenacc.equals(check)){
-            Allure.step("4. Click vào xem chi tiết thông báo đó");
-            ql.clickXemTBCT(1);
-        }else{
-            Allure.step("4. Click vào xem chi tiết thông báo đó");
-            List<WebElement> listElements = driver.findElements(By.xpath("//div[@id='announce-detail']//a//small"));
-            int total = listElements.size();
-            for (int index = 1; index <= total; index++) {
-                String from =ql.nguoiDang(index);
-                if (from.equals("From: Quản trị viên")) {
-                    ql.clickXemTBCT(index);
-                    break;
+        try{
+            Allure.step("1. Đăng nhập vào hệ thống bằng acc "+user);
+            login(user,pass);
+            QuanLyThongBaoPage ql = new QuanLyThongBaoPage(driver);
+            Allure.step("2. Điều hướng đến màn hình quản lý thông báo ");
+            ql.navigationQLTB();
+            Allure.step("3. Tìm thông báo do do chính acc đó đăng");
+            String tenacc = "From: "+ wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='name']//b"))).getText();
+            String check = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='announce-detail'][1]//a//small"))).getText();
+            if(tenacc.equals(check)){
+                Allure.step("4. Click vào xem chi tiết thông báo đó");
+                ql.clickXemTBCT(1);
+            }else{
+                Allure.step("4. Click vào xem chi tiết thông báo đó");
+                List<WebElement> listElements = driver.findElements(By.xpath("//div[@id='announce-detail']//a//small"));
+                int total = listElements.size();
+                for (int index = 1; index <= total; index++) {
+                    String from =ql.nguoiDang(index);
+                    if (from.equals("From: Quản trị viên")) {
+                        ql.clickXemTBCT(index);
+                        break;
+                    }
                 }
             }
-        }
-        Allure.step("5. Bấm vào icon chỉnh sửa");
-        ql.clickIconEdit();
-        sleep(1000);
-        try{
+            Allure.step("5. Bấm vào icon chỉnh sửa");
+            ql.clickIconEdit();
+            sleep(1000);
             Allure.step("6. Xác thực xem có hiển thị popup chỉnh sửa thông báo không");
             String popupDisplay = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='xmas-popup']"))).getCssValue("display");
             Assert.assertEquals(popupDisplay, "block", "Popup chỉnh sửa không mở");

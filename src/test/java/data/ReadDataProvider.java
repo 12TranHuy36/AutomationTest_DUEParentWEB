@@ -187,4 +187,39 @@ public class ReadDataProvider {
         }
         return combinedData.toArray(new Object[0][0]);
     }
+
+    @DataProvider(name = "AccountAdminAndAccInvalid")
+    public Object[][] getAccountAdminAndAccInvalid() throws IOException {
+        // 1. Đọc file json
+        File accountFile = new File(System.getProperty("user.dir") + "/src/test/resources/account.json");
+        File createaccFile = new File(System.getProperty("user.dir") + "/src/test/resources/createacc.json");
+
+        // 2. Lấy danh sách tạo acc không hợp lệ
+        List<Map<String, Object>> accInvalidList = JsonPath.read(createaccFile, "$.accInvalid[*]");
+        // 3. Lấy danh sách acc admin
+        List<Map<String, Object>> adminAccounts = JsonPath.read(accountFile, "$.acc.admin[*]");
+
+        // 4. Tạo danh sách kết hợp acc + tạo acc không hợp lệ
+        List<Object[]> combinedData = new ArrayList<>();
+
+        for (Map<String, Object> account : adminAccounts) {
+            for (Map<String, Object> accInvalid : accInvalidList) {
+                combinedData.add(new Object[]{
+                        account.get("user"),
+                        account.get("pass"),
+                        accInvalid.get("tenHienThi"),
+                        accInvalid.get("tenDangNhap"),
+                        accInvalid.get("vaiTro"),
+                        accInvalid.get("phongBan"),
+                        accInvalid.get("soDienThoai"),
+                        accInvalid.get("email"),
+                        accInvalid.get("trangThai"),
+                        accInvalid.get("matKhau"),
+                        accInvalid.get("nhapLaiMatKhau"),
+                        accInvalid.get("lyDoKhongHopLe")
+                });
+            }
+        }
+        return combinedData.toArray(new Object[0][0]);
+    }
 }
